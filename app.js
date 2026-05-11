@@ -1,6 +1,7 @@
 // Supabase connection
-const supabaseUrl = "https://stnfukvtkwwmstkvweue.supabase.co";
-const supabaseKey = "sb_publishable_OGkWQw8s2AIkRQrqpLwIXQ_WTuDWOyN"; // your publishable key
+const supabaseUrl = "https://tuapoyqycjkxfbdlxedc.supabase.co";
+const supabaseKey = "sb_publishable_1MYY6J4KJzNhmnBrIA13BA_GM5OayRt
+"; // your publishable key
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 // DOM elements
