@@ -1,6 +1,6 @@
 // Supabase connection
 const supabaseUrl = "https://tuapoyqycjkxfbdlxedc.supabase.co";
-const supabaseKey = "sb_publishable_1MYY6J4KJzNhmnBrIA13BA_GM5OayRt"; // SINGLE LINE, NO BREAKS
+const supabaseKey = "sb_publishable_1MYY6J4KJzNhmnBrIA13BA_GM5OayRt"; // single line, no breaks
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 // DOM elements
