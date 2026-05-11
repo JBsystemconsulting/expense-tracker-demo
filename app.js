@@ -1,9 +1,8 @@
-// STEP 1: Connect to Supabase
-const supabaseUrl = "https://stnfukvtkwwmstkvweue.supabase.co";;
+const supabaseUrl = "https://stnfukvtkwwmstkvweue.supabase.co";
 const supabaseKey = "sb_publishable_OGkWQw8s2AIkRQrqpLwIXQ_WTuDWOyN";
 
-// Create Supabase client
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// Create Supabase client (IMPORTANT: rename variable)
+const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 // STEP 2: Get form elements
 const form = document.getElementById("expense-form");
@@ -16,7 +15,7 @@ form.addEventListener("submit", async (e) => {
   const description = document.getElementById("description").value;
   const amount = document.getElementById("amount").value;
 
-  const { error } = await supabase
+  const { error } = await client
     .from("expenses")
     .insert([
       {
@@ -36,7 +35,7 @@ form.addEventListener("submit", async (e) => {
 
 // STEP 4: Load expenses from database
 async function loadExpenses() {
-  const { data, error } = await supabase
+  const { data, error } = await client
     .from("expenses")
     .select("*")
     .order("id", { ascending: false });
