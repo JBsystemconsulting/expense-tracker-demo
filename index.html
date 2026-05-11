@@ -3,31 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Expense Tracker</title>
+  <title>Expense Tracker - JB System Consulting Demo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Expense Tracker</h1>
+    <header>
+      <img src="logo.png" alt="JB System Consulting" class="logo">
+      <h1>Expense Tracker Demo</h1>
+      <p>Proof-of-Concept Internal Tool</p>
+    </header>
+
     <form id="expense-form">
       <div class="form-group">
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
+        <input type="text" id="description" name="description" placeholder="e.g., Office supplies" required>
       </div>
       <div class="form-group">
         <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" required>
+        <input type="number" id="amount" name="amount" placeholder="e.g., 50" required>
       </div>
       <button type="submit">Add Expense</button>
     </form>
+
     <div id="expenses-container">
       <h2>Expenses</h2>
       <ul id="expenses-list"></ul>
+      <div id="total-container">
+        <strong>Total: $<span id="total">0</span></strong>
+      </div>
     </div>
   </div>
 
-  <!-- Include Supabase client library -->
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- App JS -->
   <script src="app.js"></script>
 </body>
 </html>
