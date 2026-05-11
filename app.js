@@ -1,28 +1,22 @@
+// Supabase connection
 const supabaseUrl = "https://stnfukvtkwwmstkvweue.supabase.co";
-const supabaseKey = "sb_publishable_OGkWQw8s2AIkRQrqpLwIXQ_WTuDWOyN"; // paste your sb_publishable_... key here
-
-// IMPORTANT: DO NOT name this "supabase"
+const supabaseKey = "sb_publishable_OGkWQw8s2AIkRQrqpLwIXQ_WTuDWOyN"; // your publishable key
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
-// Get form elements
+// DOM elements
 const form = document.getElementById("expense-form");
 const list = document.getElementById("expenses-list");
+const totalSpan = document.getElementById("total");
 
 // Add expense
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-
   const description = document.getElementById("description").value;
   const amount = document.getElementById("amount").value;
 
-  const { error } = await client
-    .from("expenses")
-    .insert([
-      {
-        description: description,
-        amount: amount
-      }
-    ]);
+  const { error } = await client.from("expenses").insert([
+    { description, amount }
+  ]);
 
   if (error) {
     console.error("Insert error:", error.message);
@@ -46,18 +40,36 @@ async function loadExpenses() {
   }
 
   list.innerHTML = "";
+  let total = 0;
 
   data.forEach((expense) => {
+    total += parseFloat(expense.amount);
+
     const li = document.createElement("li");
     li.innerHTML = `
       <span>${expense.description}</span>
       <span>$${expense.amount}</span>
+      <button class="edit-btn">Edit</button>
+      <button class="delete-btn">Delete</button>
     `;
     list.appendChild(li);
+
+    // Edit functionality
+    li.querySelector(".edit-btn").addEventListener("click", () => {
+      document.getElementById("description").value = expense.description;
+      document.getElementById("amount").value = expense.amount;
+      li.remove();
+    });
+
+    // Delete functionality
+    li.querySelector(".delete-btn").addEventListener("click", async () => {
+      await client.from("expenses").delete().eq("id", expense.id);
+      loadExpenses();
+    });
   });
+
+  totalSpan.textContent = total.toFixed(2);
 }
 
 // Initial load
-loadExpenses();
-// Load data when page starts
 loadExpenses();
