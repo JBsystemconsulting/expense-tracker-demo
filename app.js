@@ -1,7 +1,6 @@
 // Supabase connection
 const supabaseUrl = "https://tuapoyqycjkxfbdlxedc.supabase.co";
-const supabaseKey = "sb_publishable_1MYY6J4KJzNhmnBrIA13BA_GM5OayRt
-"; // your publishable key
+const supabaseKey = "sb_publishable_1MYY6J4KJzNhmnBrIA13BA_GM5OayRt"; // NO line break
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 // DOM elements
