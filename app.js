@@ -1,14 +1,14 @@
 const supabaseUrl = "https://stnfukvtkwwmstkvweue.supabase.co";
-const supabaseKey = "sb_publishable_OGkWQw8s2AIkRQrqpLwIXQ_WTuDWOyN";
+const supabaseKey = "YOUR_PUBLISHABLE_KEY"; // paste your sb_publishable_... key here
 
-// Create Supabase client (IMPORTANT: rename variable)
+// IMPORTANT: DO NOT name this "supabase"
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
-// STEP 2: Get form elements
+// Get form elements
 const form = document.getElementById("expense-form");
 const list = document.getElementById("expenses-list");
 
-// STEP 3: Add expense
+// Add expense
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -25,7 +25,7 @@ form.addEventListener("submit", async (e) => {
     ]);
 
   if (error) {
-    console.error("Insert error:", error);
+    console.error("Insert error:", error.message);
     return;
   }
 
@@ -33,7 +33,7 @@ form.addEventListener("submit", async (e) => {
   loadExpenses();
 });
 
-// STEP 4: Load expenses from database
+// Load expenses
 async function loadExpenses() {
   const { data, error } = await client
     .from("expenses")
@@ -41,7 +41,7 @@ async function loadExpenses() {
     .order("id", { ascending: false });
 
   if (error) {
-    console.error("Fetch error:", error);
+    console.error("Fetch error:", error.message);
     return;
   }
 
@@ -57,5 +57,7 @@ async function loadExpenses() {
   });
 }
 
+// Initial load
+loadExpenses();
 // Load data when page starts
 loadExpenses();
